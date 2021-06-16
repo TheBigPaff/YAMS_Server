@@ -1,42 +1,49 @@
 <?php 
-    $conn = new mysqli("localhost", "root", "", "yetanothermobileshooter");
+include_once 'jwt_manager.php';
+include_once 'email.php';
 
-    if(mysqli_connect_errno()){
-        die("1: Connection Failed"); // error code #1 = connection failed
-    }
+$conn = new mysqli("localhost", "root", "", "yetanothermobileshooter");
 
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+if(mysqli_connect_errno()){
+    die("1: Connection Failed"); // error code #1 = connection failed
+}
 
-    // https://www.codegrepper.com/code-examples/php/errors+in+mysql+php+prepared+statement
+$username = $_POST["username"];
+$email = $_POST["email"];
+$password = $_POST["password"];
 
-    // check if name exists
-    $query = "SELECT username FROM user WHERE username = ?";
-    $stmt = $conn->prepare($query);
+// https://www.codegrepper.com/code-examples/php/errors+in+mysql+php+prepared+statement
 
-    if($stmt === false){
-        die("2: " . $mysqli->error);
-    }
+// check if name exists
+$query = "SELECT username FROM user WHERE username = ?";
+$stmt = $conn->prepare($query);
 
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+if($stmt === false){
+    die("2: " . $mysqli->error);
+}
 
-    if(mysqli_num_rows($result) > 0){
-        die("3: Name already exists");
-    }
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    // add user to the table
-    $hash = password_hash($password, PASSWORD_ARGON2I); // https://framework.zend.com/blog/2017-08-17-php72-argon2-hash-password.html
-    $query = "INSERT INTO user(username, email, password) VALUES (?,?,?)";
-    $stmt = $conn->prepare($query);
-    if($stmt === false){
-        die("4: " . $mysqli->error);
-    }
-    $stmt->bind_param("sss", $username, $email, $hash);
-    $stmt->execute();
-    
+if(mysqli_num_rows($result) > 0){
+    die("3: Name already exists");
+}
 
-    echo("0");
+// add user to the table
+$hash = password_hash($password, PASSWORD_ARGON2I); // https://framework.zend.com/blog/2017-08-17-php72-argon2-hash-password.html
+$query = "INSERT INTO user(username, email, password) VALUES (?,?,?)";
+$stmt = $conn->prepare($query);
+if($stmt === false){
+    die("4: " . $mysqli->error);
+}
+$stmt->bind_param("sss", $username, $email, $hash);
+$stmt->execute();
+$id=$conn->insert_id;   
+
+// send verification email
+$token = encode_token($id);
+send_email($email, 'Verify your Yet Another Mobile Shooter account', "http://localhost/yetanothermobileshooter/verification.php?token=".$token);
+
+echo("0");
 ?>
