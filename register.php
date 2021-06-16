@@ -6,6 +6,7 @@
     }
 
     $username = $_POST["username"];
+    $email = $_POST["email"];
     $password = $_POST["password"];
 
     // https://www.codegrepper.com/code-examples/php/errors+in+mysql+php+prepared+statement
@@ -28,12 +29,12 @@
 
     // add user to the table
     $hash = password_hash($password, PASSWORD_ARGON2I); // https://framework.zend.com/blog/2017-08-17-php72-argon2-hash-password.html
-    $query = "INSERT INTO user(username, password) VALUES (?,?)";
+    $query = "INSERT INTO user(username, email, password) VALUES (?,?,?)";
     $stmt = $conn->prepare($query);
     if($stmt === false){
         die("4: " . $mysqli->error);
     }
-    $stmt->bind_param("ss", $username, $hash);
+    $stmt->bind_param("sss", $username, $email, $hash);
     $stmt->execute();
     
 
