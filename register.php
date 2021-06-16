@@ -43,7 +43,7 @@ $id=$conn->insert_id;
 
 // send verification email
 $token = encode_token($id);
-send_email($email, 'Verify your Yet Another Mobile Shooter account', "http://localhost/yetanothermobileshooter/verification.php?token=".$token);
+send_email($email, 'Verify your Yet Another Mobile Shooter account', "<b>Click this link to verify your user account:</b> http://localhost/yetanothermobileshooter/verification.php?token=".$token);
 
 echo("0");
 ?>

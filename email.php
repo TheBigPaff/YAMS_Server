@@ -24,6 +24,7 @@ function send_email($toEmail, $subject, $body){
     $mail->From = 'yetanothermobileshooter@gmail.com';
     $mail->FromName = 'YetAnotherMobileShooter';
     $mail->addAddress($toEmail);     // Add a recipient
+    $mail->isHTML(true);                                  // Set email format to HTML
 
     $mail->Subject = $subject;
     $mail->Body = $body;
