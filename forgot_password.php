@@ -17,10 +17,12 @@
             die("1: No user with that email");
         }
 
+        $username = $result->fetch_assoc()["username"];
+
         // send email 
         $token = encode_token_email($email);
         send_email($email, 'Change your Yet Another Mobile Shooter account password', 
-        "Hi! You're receiving this email because you asked to change your 'Yet Another Mobile Shooter' account password. 
+        "Hi, $username! You're receiving this email because you asked to change your 'Yet Another Mobile Shooter' account password. 
         If it wasn't you that asked for this, kindly ignore this email.<br><b>Click <a href=\"http://localhost/yetanothermobileshooter/forgot_password.php?token=".$token."\">this link</a> to change your password.</b>");
         echo "0";
     }
