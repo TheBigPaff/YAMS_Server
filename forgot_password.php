@@ -33,7 +33,7 @@
             $decoded->nbf > $now->getTimestamp() ||
             $decoded->exp < $now->getTimestamp())
         {
-            echo "Not authorized."; // TODO: check is JWT has already been used once
+            echo "Not authorized."; // TODO: check if JWT has already been used once
             exit;
         }
         else{
@@ -58,7 +58,7 @@
         $decoded->nbf > $now->getTimestamp() ||
         $decoded->exp < $now->getTimestamp())
         {
-            echo "Not authorized."; // TODO: check is JWT has already been used once
+            echo "Not authorized."; // TODO: check if JWT has already been used once
             exit;
         }
 

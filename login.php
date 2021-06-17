@@ -19,8 +19,11 @@
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if(mysqli_num_rows($result) != 1){
-        die("3: Either no user with that name, or more than one");
+    if(mysqli_num_rows($result) == 0){
+        die("3: No user with that name");
+    }
+    else if(mysqli_num_rows($result) > 1){
+        die("3: More than one user with that name... Weird");
     }
 
     // get login info from query 

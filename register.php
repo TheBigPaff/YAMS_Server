@@ -30,12 +30,28 @@ if(mysqli_num_rows($result) > 0){
     die("3: Name already exists");
 }
 
+// check if email exists
+$query = "SELECT username FROM user WHERE email = ?";
+$stmt = $conn->prepare($query);
+
+if($stmt === false){
+    die("4: " . $mysqli->error);
+}
+
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if(mysqli_num_rows($result) > 0){
+    die("5: Email already exists");
+}
+
 // add user to the table
 $hash = password_hash($password, PASSWORD_ARGON2I); // https://framework.zend.com/blog/2017-08-17-php72-argon2-hash-password.html
 $query = "INSERT INTO user(username, email, password) VALUES (?,?,?)";
 $stmt = $conn->prepare($query);
 if($stmt === false){
-    die("4: " . $mysqli->error);
+    die("6: " . $mysqli->error);
 }
 $stmt->bind_param("sss", $username, $email, $hash);
 $stmt->execute();
