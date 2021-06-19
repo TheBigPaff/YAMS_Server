@@ -41,16 +41,52 @@
         else{
             session_start();
             echo '
-            <form method="POST">
-                <input type="hidden" name="token" value="'.$_GET["token"].'" />
-                <label>New password:</label><br>
-                <input type="password"  name="password"><br>
-                <label>Confirm new passowrd:</label><br>
-                <input type="password" name="confirm_password"><br><br>
-                <input type="submit" value="Submit">
-            </form> 
+            <html>
+                <head>
+                    <link rel="stylesheet" href="styles/form.css">
+                    <script src="scripts/forgot_password.js"></script>
+                </head>
+                <body>
+                    <div class="signupSection">
+                        <div class="info">
+                            <h2>Yet Another Mobile Shooter</h2>
+                            <img src="assets/logo.jpeg" alt="Logo" id="logo">
+                            <p>Secure form to change your password</p>
+                        </div>
+                    <form action="#" method="POST" class="signupForm" name="signupform">
+                        <input type="hidden" name="token" value="'.$_GET["token"].'" />
+                        <h2>Change your password</h2>
+                        <ul class="noBullet">
+                            <li>
+                                <label for="password"></label>
+                                <input type="password" class="inputFields" id="password" name="password" placeholder="Password" value="" oninput="return passwordValidation(this.value)" required/>
+                            </li>
+                            <li>
+                                <label for="confirm_password"></label>
+                                <input type="password" class="inputFields" id="confirm_password" name="confirm_password" placeholder="Confirm Password" value="" oninput="return confirmPasswordValidation(this.value)" required/>
+                            </li>
+                            <li id="center-btn">
+                            <input type="submit" id="join-btn" name="join" alt="Join" value="Join">
+                            </li>
+                        </ul>
+                    </form>
+                    </div>
+
+                    <!--<form method="POST">
+                        <input type="hidden" name="token" value="'.$_GET["token"].'" />
+                        <label>New password:</label><br>
+                        <input type="password"  name="password"><br>
+                        <label>Confirm new passowrd:</label><br>
+                        <input type="password" name="confirm_password"><br><br>
+                        <input type="submit" value="Submit">
+                    </form>-->
+                </body>
+            </html>
             ';
         }
+    }
+    else{
+        echo "Not authorized.";
     }
 
     if(isset($_POST["password"]) && !empty($_POST["password"]) && isset($_POST["confirm_password"]) && !empty($_POST["confirm_password"]) && isset($_GET["token"])){
