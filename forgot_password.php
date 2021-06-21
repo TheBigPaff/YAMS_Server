@@ -59,14 +59,14 @@
                         <ul class="noBullet">
                             <li>
                                 <label for="password"></label>
-                                <input type="password" class="inputFields" id="password" name="password" placeholder="Password" value="" oninput="return passwordValidation(this.value)" required/>
+                                <input type="password" class="inputFields" id="password" name="password" placeholder="New Password" value="" oninput="return passwordValidation(this.value)" required/>
                             </li>
                             <li>
                                 <label for="confirm_password"></label>
-                                <input type="password" class="inputFields" id="confirm_password" name="confirm_password" placeholder="Confirm Password" value="" oninput="return confirmPasswordValidation(this.value)" required/>
+                                <input type="password" class="inputFields" id="confirm_password" name="confirm_password" placeholder="Confirm New Password" value="" oninput="return confirmPasswordValidation(this.value)" required/>
                             </li>
                             <li id="center-btn">
-                            <input type="submit" id="join-btn" name="join" alt="Join" value="Join">
+                            <input type="submit" id="join-btn" name="join" alt="Join" value="Change Password">
                             </li>
                         </ul>
                     </form>
