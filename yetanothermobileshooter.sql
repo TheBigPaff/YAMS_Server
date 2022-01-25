@@ -48,14 +48,6 @@ CREATE TABLE `user` (
   `verified` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `username`, `email`, `password`, `verified`) VALUES
-(24, 'patrick', 'thebigpaff@gmail.com', '$argon2i$v=19$m=65536,t=4,p=1$WXkyRTlZbm1mUXkuY2hKcA$gFL9P7cFE+gq9kUYczzZfzXJ8ooLHBMJUe6Oe7TOgVo', 1),
-(25, 'test', 'test@test.com', '$argon2i$v=19$m=65536,t=4,p=1$WXkyRTlZbm1mUXkuY2hKcA$gFL9P7cFE+gq9kUYczzZfzXJ8ooLHBMJUe6Oe7TOgVo', 0),
-(27, '1', 'patrickdeniso@gmail.com', '$argon2i$v=19$m=65536,t=4,p=1$dDFSZFRKMkgwRnYzRnYyVQ$z7PhXPxX9+PyA4D1y7BikNJoN+0TjdlMejvxXJoIPt8', 1);
 
 -- --------------------------------------------------------
 
